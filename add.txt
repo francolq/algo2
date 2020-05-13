@@ -1,0 +1,26 @@
+proc add(in/out s : Set of T, in e : T)
+  var n : nat
+  var saux : List of T
+  var is_member : bool
+  var d : T
+  
+  n := 0
+  saux := list_copy(s)
+  is_member := False
+
+  {- encuentro el lugar donde va el elemento -}
+  do (not is_empty(saux) /\ not is_member)
+    d := head(saux)
+    if d = e -> is_member := true
+       d < e -> n := n+1
+       d > e -> skip
+    fi
+    tail(saux)
+  od
+
+  if (not is_member)
+    then list_add_at(s,n,e)
+  fi
+  
+  list_destroy(saux)
+end proc
